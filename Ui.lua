@@ -198,15 +198,15 @@ function ModernUI.CreateWindow(options)
     local defaultWidth, defaultHeight
     if isMobile then
         -- Phone sizing
-        defaultWidth = math.min(ViewportSize.X - 20, 400)
+        defaultWidth = math.min(ViewportSize.X - 20, 500)
         defaultHeight = math.min(ViewportSize.Y - GuiInset - 40, 500)
     elseif isTablet then
         -- Tablet sizing
-        defaultWidth = math.min(ViewportSize.X - 40, 700)
+        defaultWidth = math.min(ViewportSize.X - 40, 900)
         defaultHeight = math.min(ViewportSize.Y - GuiInset - 60, 550)
     else
         -- PC sizing
-        defaultWidth = 1000
+        defaultWidth = 1200
         defaultHeight = 550
     end
     
@@ -484,26 +484,14 @@ function ModernUI.CreateWindow(options)
         end
     end
     
-    -- Single tap support
+    -- Single tap/click support
+    local toggleDebounce = false
     MobileToggle.MouseButton1Click:Connect(function()
-        toggleWindowMobile()
-    end)
-    
-    -- Touch tap support (no hold required)
-    local touchStart = nil
-    MobileToggle.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.Touch then
-            touchStart = tick()
-        end
-    end)
-    
-    MobileToggle.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.Touch and touchStart then
-            local touchDuration = tick() - touchStart
-            if touchDuration < 0.3 then  -- Quick tap
-                toggleWindowMobile()
-            end
-            touchStart = nil
+        if not toggleDebounce then
+            toggleDebounce = true
+            toggleWindowMobile()
+            task.wait(0.5)
+            toggleDebounce = false
         end
     end)
     
@@ -521,10 +509,10 @@ function ModernUI.CreateWindow(options)
         local newWidth, newHeight
         
         if isMobile then
-            newWidth = math.min(newViewportSize.X - 20, 400)
+            newWidth = math.min(newViewportSize.X - 20, 500)
             newHeight = math.min(newViewportSize.Y - GuiInset - 40, 500)
         elseif isTablet then
-            newWidth = math.min(newViewportSize.X - 40, 700)
+            newWidth = math.min(newViewportSize.X - 40, 900)
             newHeight = math.min(newViewportSize.Y - GuiInset - 60, 550)
         else
             -- For PC, keep the current size unless it exceeds viewport
@@ -542,14 +530,13 @@ function ModernUI.CreateWindow(options)
         end
     end)
     
-    -- Player Info Box (Bottom Left - Shows avatar, username, displayname)
+    -- Player Info Box will be added to TabContainer after it's created
     local PlayerInfo = Instance.new("Frame")
     PlayerInfo.Name = "PlayerInfo"
-    PlayerInfo.Size = UDim2.new(0, 180, 0, 60)
-    PlayerInfo.Position = UDim2.new(0, 10, 1, -65)
-    PlayerInfo.BackgroundColor3 = Theme.Primary
+    PlayerInfo.Size = UDim2.new(1, 0, 0, 60)
+    PlayerInfo.BackgroundColor3 = Theme.Secondary
     PlayerInfo.BorderSizePixel = 0
-    PlayerInfo.Parent = MainFrame
+    PlayerInfo.LayoutOrder = 999999
     
     local PlayerInfoCorner = Instance.new("UICorner")
     PlayerInfoCorner.CornerRadius = UDim.new(0, 8)
@@ -621,15 +608,19 @@ function ModernUI.CreateWindow(options)
     -- Tab Container (Left Side)
     local TabContainer = Instance.new("ScrollingFrame")
     TabContainer.Name = "TabContainer"
-    TabContainer.Size = UDim2.new(0, 180, 1, -125)
+    TabContainer.Size = UDim2.new(0, 180, 1, -60)
     TabContainer.Position = UDim2.new(0, 10, 0, 55)
     TabContainer.BackgroundColor3 = Theme.Primary
     TabContainer.BorderSizePixel = 0
     TabContainer.ScrollBarThickness = 4
     TabContainer.ScrollBarImageColor3 = Theme.Accent
+    TabContainer.ScrollingEnabled = true
     TabContainer.CanvasSize = UDim2.new(0, 0, 0, 0)
     TabContainer.AutomaticCanvasSize = Enum.AutomaticSize.Y
     TabContainer.Parent = MainFrame
+    
+    -- Add player info to tab container
+    PlayerInfo.Parent = TabContainer
     
     local TabContainerStroke = Instance.new("UIStroke")
     TabContainerStroke.Color = Theme.Border
