@@ -534,20 +534,9 @@ function ModernUI.CreateWindow(options)
     local PlayerInfo = Instance.new("Frame")
     PlayerInfo.Name = "PlayerInfo"
     PlayerInfo.Size = UDim2.new(1, 0, 0, 60)
-    PlayerInfo.BackgroundColor3 = Theme.Secondary
+    PlayerInfo.BackgroundTransparency = 1
     PlayerInfo.BorderSizePixel = 0
     PlayerInfo.LayoutOrder = 999999
-    
-    local PlayerInfoCorner = Instance.new("UICorner")
-    PlayerInfoCorner.CornerRadius = UDim.new(0, 8)
-    PlayerInfoCorner.Parent = PlayerInfo
-    
-    local PlayerInfoStroke = Instance.new("UIStroke")
-    PlayerInfoStroke.Color = Theme.Border
-    PlayerInfoStroke.Thickness = 1
-    PlayerInfoStroke.Transparency = 0.6
-    PlayerInfoStroke.Parent = PlayerInfo
-    
     -- Avatar Image
     local PlayerAvatar = Instance.new("ImageLabel")
     PlayerAvatar.Name = "Avatar"
@@ -639,7 +628,7 @@ function ModernUI.CreateWindow(options)
     
     local TabPadding = Instance.new("UIPadding")
     TabPadding.PaddingTop = UDim.new(0, 5)
-    TabPadding.PaddingBottom = UDim.new(0, 75)
+    TabPadding.PaddingBottom = UDim.new(0, 5)
     TabPadding.PaddingLeft = UDim.new(0, 5)
     TabPadding.PaddingRight = UDim.new(0, 5)
     TabPadding.Parent = TabContainer
