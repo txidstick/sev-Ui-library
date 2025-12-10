@@ -198,15 +198,15 @@ function ModernUI.CreateWindow(options)
     local defaultWidth, defaultHeight
     if isMobile then
         -- Phone sizing
-        defaultWidth = math.min(ViewportSize.X - 20, 500)
+        defaultWidth = math.min(ViewportSize.X - 20, 600)
         defaultHeight = math.min(ViewportSize.Y - GuiInset - 40, 500)
     elseif isTablet then
         -- Tablet sizing
-        defaultWidth = math.min(ViewportSize.X - 40, 900)
+        defaultWidth = math.min(ViewportSize.X - 40, 1200)
         defaultHeight = math.min(ViewportSize.Y - GuiInset - 60, 550)
     else
         -- PC sizing
-        defaultWidth = 1200
+        defaultWidth = 1600
         defaultHeight = 550
     end
     
@@ -509,10 +509,10 @@ function ModernUI.CreateWindow(options)
         local newWidth, newHeight
         
         if isMobile then
-            newWidth = math.min(newViewportSize.X - 20, 500)
+            newWidth = math.min(newViewportSize.X - 20, 600)
             newHeight = math.min(newViewportSize.Y - GuiInset - 40, 500)
         elseif isTablet then
-            newWidth = math.min(newViewportSize.X - 40, 900)
+            newWidth = math.min(newViewportSize.X - 40, 1200)
             newHeight = math.min(newViewportSize.Y - GuiInset - 60, 550)
         else
             -- For PC, keep the current size unless it exceeds viewport
@@ -552,7 +552,7 @@ function ModernUI.CreateWindow(options)
     local PlayerAvatar = Instance.new("ImageLabel")
     PlayerAvatar.Name = "Avatar"
     PlayerAvatar.Size = UDim2.new(0, 40, 0, 40)
-    PlayerAvatar.Position = UDim2.new(0, 10, 0.5, -20)
+    PlayerAvatar.Position = UDim2.new(0, 10, 0, 10)
     PlayerAvatar.BackgroundColor3 = Theme.Secondary
     PlayerAvatar.BorderSizePixel = 0
     PlayerAvatar.Parent = PlayerInfo
@@ -579,7 +579,7 @@ function ModernUI.CreateWindow(options)
     local PlayerUsername = Instance.new("TextLabel")
     PlayerUsername.Name = "Username"
     PlayerUsername.Size = UDim2.new(1, -60, 0, 18)
-    PlayerUsername.Position = UDim2.new(0, 55, 0, 10)
+    PlayerUsername.Position = UDim2.new(0, 55, 0, 16)
     PlayerUsername.BackgroundTransparency = 1
     PlayerUsername.Text = "@" .. LocalPlayer.Name
     PlayerUsername.TextColor3 = Theme.Text
@@ -593,7 +593,7 @@ function ModernUI.CreateWindow(options)
     local PlayerDisplayName = Instance.new("TextLabel")
     PlayerDisplayName.Name = "DisplayName"
     PlayerDisplayName.Size = UDim2.new(1, -60, 0, 16)
-    PlayerDisplayName.Position = UDim2.new(0, 55, 0, 30)
+    PlayerDisplayName.Position = UDim2.new(0, 55, 0, 36)
     PlayerDisplayName.BackgroundTransparency = 1
     PlayerDisplayName.Text = LocalPlayer.DisplayName
     PlayerDisplayName.TextColor3 = Theme.SubText
@@ -639,7 +639,7 @@ function ModernUI.CreateWindow(options)
     
     local TabPadding = Instance.new("UIPadding")
     TabPadding.PaddingTop = UDim.new(0, 5)
-    TabPadding.PaddingBottom = UDim.new(0, 5)
+    TabPadding.PaddingBottom = UDim.new(0, 75)
     TabPadding.PaddingLeft = UDim.new(0, 5)
     TabPadding.PaddingRight = UDim.new(0, 5)
     TabPadding.Parent = TabContainer
