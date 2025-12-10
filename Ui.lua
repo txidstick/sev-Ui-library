@@ -198,15 +198,15 @@ function ModernUI.CreateWindow(options)
     local defaultWidth, defaultHeight
     if isMobile then
         -- Phone sizing
-        defaultWidth = math.min(ViewportSize.X - 20, 600)
+        defaultWidth = math.min(ViewportSize.X - 20, 700)
         defaultHeight = math.min(ViewportSize.Y - GuiInset - 40, 500)
     elseif isTablet then
         -- Tablet sizing
-        defaultWidth = math.min(ViewportSize.X - 40, 1200)
+        defaultWidth = math.min(ViewportSize.X - 40, 1400)
         defaultHeight = math.min(ViewportSize.Y - GuiInset - 60, 550)
     else
         -- PC sizing
-        defaultWidth = 1600
+        defaultWidth = 2000
         defaultHeight = 550
     end
     
@@ -509,10 +509,10 @@ function ModernUI.CreateWindow(options)
         local newWidth, newHeight
         
         if isMobile then
-            newWidth = math.min(newViewportSize.X - 20, 600)
+            newWidth = math.min(newViewportSize.X - 20, 700)
             newHeight = math.min(newViewportSize.Y - GuiInset - 40, 500)
         elseif isTablet then
-            newWidth = math.min(newViewportSize.X - 40, 1200)
+            newWidth = math.min(newViewportSize.X - 40, 1400)
             newHeight = math.min(newViewportSize.Y - GuiInset - 60, 550)
         else
             -- For PC, keep the current size unless it exceeds viewport
